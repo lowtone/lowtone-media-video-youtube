@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: YouTube\n"
+"POT-Creation-Date: 2013-06-20 12:20+0100\n"
+"PO-Revision-Date: 2013-06-20 12:21+0100\n"
+"Last-Translator: Paul van der Meijs <info@lowtone.nl>\n"
+"Language-Team: Lowtone <info@lowtone.nl>\n"
+"Language: Dutch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ../..\n"
+
+#: ../../lowtone-media-video-youtube.php:37
+msgid "YouTube"
+msgstr "YouTube"
+
+#: ../../lowtone-media-video-youtube.php:52
+#: ../../lowtone-media-video-youtube.php:53
+#: ../../lowtone-media-video-youtube.php:65
+msgid "Add YouTube video"
+msgstr "YouTube video toevoegen"
+
+#: ../../lowtone-media-video-youtube.php:70
+msgid "Cheatin&#8217; uh?"
+msgstr ""

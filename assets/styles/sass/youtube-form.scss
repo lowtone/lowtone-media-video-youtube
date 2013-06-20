@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+#lowtone_media_video_youtube_video {
+	.results {
+		li {
+			display: inline-block;
+			padding: .5em .5em 1em;
+			min-height: 200px;
+			cursor: pointer;
+			border: 1px solid transparent;
+
+			&.selected {
+				background-color: #fff;
+				border-color: #dfdfdf;
+			}
+
+			figure {
+				padding: 0;
+				margin: 0;
+				margin-bottom: 1em;
+
+				img {
+					display: none;
+					width: 100%;
+
+					&.hqdefault {
+						display: block;
+					}
+				}
+			}
+
+			&:nth-child(4n+5) {
+				clear: both;
+			}
+		}
+	}
+}
