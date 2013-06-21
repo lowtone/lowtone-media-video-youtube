@@ -180,6 +180,15 @@ namespace lowtone\media\video\youtube {
 					unset($_POST["lowtone_media_video_youtube"]);
 
 					wp_update_post($post);
+
+					if (!has_post_thumbnail($post->{Video::PROPERTY_ID})) {
+
+						$video = Video::fromPost($post);
+						
+						if ($thumbnail = $video->fetchThumbnail("sddefault")) 
+							$video->thumbnail($thumbnail);
+
+					}
 				};
 				
 				add_action("add_attachment", $saveAttachment);

@@ -2,6 +2,7 @@
 namespace lowtone\media\video\youtube\videos;
 use lowtone\media\video\videos\Video as Base,
 	lowtone\dom\Document,
+	lowtone\io\File,
 	lowtone\net\URL,
 	lowtone\wp\posts\meta\Meta,
 	lowtone\google\youtube\videos\Video as YouTubeVideo;
@@ -87,7 +88,7 @@ class Video extends Base {
 		$dataAtt = NULL;
 
 		if (NULL !== ($data = $this->data())) {
-
+			
 			$dataAtt = json_encode(array(
 					"aspect_ratio" => $data->{'media$group'}->{'yt$aspectRatio'}->{'$t'}
 				));
@@ -152,6 +153,41 @@ class Video extends Base {
 			));
 
 		return $video->fetchData();
+	}
+
+	public function fetchThumbnail($name = NULL) {
+		if (NULL === ($data = $this->data()))
+			return false;
+
+		$thumbnails = $data->{'media$group'}->{'media$thumbnail'};
+
+		$thumbnail = false;
+
+		if (isset($name)) {
+
+			foreach ($thumbnails as $t) {
+				if ($t->{'yt$name'} != $name)
+					continue;
+
+				$thumbnail = $t;
+
+				break;
+
+			}
+
+		} else
+			$thumbnail = reset($thumbnails);
+
+		if (!$thumbnail)
+			return false;
+
+		try {
+			$file = File::get($thumbnail->url);
+		} catch (\Exception $e) {
+			return false;
+		}
+
+		return $file;
 	}
 
 	// Static
