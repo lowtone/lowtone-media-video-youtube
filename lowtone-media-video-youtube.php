@@ -31,7 +31,7 @@ namespace lowtone\media\video\youtube {
 		return trigger_error("Lowtone Content plugin is required", E_USER_ERROR) && false;
 
 	$__i = Package::init(array(
-			Package::INIT_PACKAGES => array("lowtone", "lowtone\\style", "lowtone\\google\\youtube", "lowtone\\media\\video"),
+			Package::INIT_PACKAGES => array("lowtone", "lowtone\\style", "lowtone\\google\\youtube", "lowtone\\media\\video", "lowtone\\media"),
 			Package::INIT_MERGED_PATH => __NAMESPACE__,
 			Package::INIT_SUCCESS => function() {
 

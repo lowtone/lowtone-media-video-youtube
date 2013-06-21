@@ -57,8 +57,10 @@ class Video extends Base {
 
 		$query = array_intersect_key($options, array_flip(array(
 				self::PLAYER_OPTION_AUTOHIDE,
+				self::PLAYER_OPTION_AUTOPLAY,
 				self::PLAYER_OPTION_CC_LOAD_POLICY,
 				self::PLAYER_OPTION_COLOR,
+				self::PLAYER_OPTION_CONTROLS,
 				self::PLAYER_OPTION_DISABLEKB,
 				self::PLAYER_OPTION_ENABLEJSAPI,
 				self::PLAYER_OPTION_END,
