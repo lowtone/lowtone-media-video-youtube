@@ -19,6 +19,7 @@
 namespace lowtone\media\video\youtube {
 
 	use lowtone\content\packages\Package,
+		lowtone\media\types\Type,
 		lowtone\media\video\youtube\videos\Video,
 		lowtone\ui\forms\Form,
 		lowtone\ui\forms\Input,
@@ -37,29 +38,12 @@ namespace lowtone\media\video\youtube {
 
 				Video::__register();
 
-				add_filter("media_upload_tabs", function($tabs) {
-					$tabs["youtube"] = __("YouTube", "lowtone_media_video_youtube");
-
-					return $tabs;
-				});
-
-				add_filter("attachment_link", function($link, $postId) {
-					if (($post = get_post($postId)) && Video::MIME_TYPE_YOUTUBE == $post->{Video::PROPERTY_POST_MIME_TYPE})
-						return $post->{Video::PROPERTY_GUID};
-
-					return $link;
-				}, 10, 2);
-
-				// Add video form
-
-				add_action("admin_menu", function() {
-				
-					add_media_page(
-							__("Add YouTube video", "lowtone_media_video_youtube"),
-							__("Add YouTube video", "lowtone_media_video_youtube"),
-							"upload_files",
-							"lowtone_media_video_youtube_add",
-							function() {
+				\lowtone\media\addMediaType(new Type(array(
+						Type::PROPERTY_TITLE => __("YouTube", "lowtone_media_video_youtube"),
+						Type::PROPERTY_NEW_FILE_TEXT => __("Add a reference to a video on YouTube.", "lowtone_media_video_youtube"),
+						Type::PROPERTY_SLUG => "youtube",
+						Type::PROPERTY_IMAGE => plugins_url("/assets/images/youtube-icon.png", __FILE__),
+						Type::PROPERTY_NEW_FILE_CALLBACK => function() {
 								// require_once('./admin.php');
 
 								global $post_type, $post_type_object, $title, $editing, $post, $post_ID;
@@ -162,9 +146,24 @@ namespace lowtone\media\video\youtube {
 
 								// include('./admin-footer.php');
 							}
-						);
+					)));
 
+				// Add tab to media uploader
+
+				add_filter("media_upload_tabs", function($tabs) {
+					$tabs["youtube"] = __("YouTube", "lowtone_media_video_youtube");
+
+					return $tabs;
 				});
+
+				// Replace link with YouTube URL
+
+				add_filter("attachment_link", function($link, $postId) {
+					if (($post = get_post($postId)) && Video::MIME_TYPE_YOUTUBE == $post->{Video::PROPERTY_POST_MIME_TYPE})
+						return $post->{Video::PROPERTY_GUID};
+
+					return $link;
+				}, 10, 2);
 
 				// Save post
 				
