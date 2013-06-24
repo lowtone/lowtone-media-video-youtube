@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: YouTube\n"
-"POT-Creation-Date: 2013-06-20 12:20+0100\n"
-"PO-Revision-Date: 2013-06-20 12:21+0100\n"
+"POT-Creation-Date: 2013-06-22 22:19+0100\n"
+"PO-Revision-Date: 2013-06-22 22:19+0100\n"
 "Last-Translator: Paul van der Meijs <info@lowtone.nl>\n"
 "Language-Team: Lowtone <info@lowtone.nl>\n"
 "Language: Dutch\n"
@@ -15,16 +15,31 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ../..\n"
 
-#: ../../lowtone-media-video-youtube.php:37
+#: ../../lowtone-media-video-youtube.php:42
+#: ../../lowtone-media-video-youtube.php:154
 msgid "YouTube"
 msgstr "YouTube"
 
-#: ../../lowtone-media-video-youtube.php:52
-#: ../../lowtone-media-video-youtube.php:53
-#: ../../lowtone-media-video-youtube.php:65
+#: ../../lowtone-media-video-youtube.php:43
+msgid "Add a reference to a video on YouTube."
+msgstr "Een verwijzing naar een video op YouTube toevoegen."
+
+#: ../../lowtone-media-video-youtube.php:55
 msgid "Add YouTube video"
 msgstr "YouTube video toevoegen"
 
-#: ../../lowtone-media-video-youtube.php:70
+#: ../../lowtone-media-video-youtube.php:60
 msgid "Cheatin&#8217; uh?"
 msgstr ""
+
+#: ../../lowtone-media-video-youtube.php:79
+msgid "YouTube video"
+msgstr "YouTube video"
+
+#: ../../lowtone-media-video-youtube.php:105
+msgid "Search video"
+msgstr "Zoek video"
+
+#: ../../lowtone-media-video-youtube.php:138
+msgid "Save"
+msgstr "Opslaan"

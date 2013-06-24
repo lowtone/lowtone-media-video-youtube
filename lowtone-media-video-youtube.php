@@ -36,7 +36,15 @@ namespace lowtone\media\video\youtube {
 			Package::INIT_MERGED_PATH => __NAMESPACE__,
 			Package::INIT_SUCCESS => function() {
 
+				// Register textdomain
+				
+				load_plugin_textdomain("lowtone_media_video_youtube", false, basename(__DIR__) . "/assets/languages");
+
+				// Register Video class
+
 				Video::__register();
+
+				// Add media type
 
 				\lowtone\media\addMediaType(new Type(array(
 						Type::PROPERTY_TITLE => __("YouTube", "lowtone_media_video_youtube"),
@@ -201,12 +209,6 @@ namespace lowtone\media\video\youtube {
 				
 				add_action("wp_enqueue_scripts", $enqueueEmbedScript);
 				add_action("admin_enqueue_scripts", $enqueueEmbedScript);
-
-				// Register textdomain
-				
-				add_action("plugins_loaded", function() {
-					load_plugin_textdomain("lowtone_media_video_youtube", false, basename(__DIR__) . "/assets/languages");
-				});
 
 				return true;
 			}
