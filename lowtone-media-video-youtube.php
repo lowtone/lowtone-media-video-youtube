@@ -125,7 +125,7 @@ namespace lowtone\media\video\youtube {
 																'<figure>' . 
 																'<img ng-repeat="thumbnail in result.media$group.media$thumbnail" src="{{thumbnail.url}}" alt="" class="{{thumbnail.yt$name}}">' .
 																'</figure>' .
-																'<h3>{{result.title.$t}}</h3>' .
+																sprintf('<h3>{{result.title.$t}} <span class="author">%s {{result.author[0].name.$t}}</h3>', esc_html(__("by", "lowtone_media_video_youtube"))) .
 																'</li>'
 														))
 												)
