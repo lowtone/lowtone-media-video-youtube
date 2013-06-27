@@ -192,7 +192,7 @@ namespace lowtone\media\video\youtube {
 
 						$video = Video::fromPost($post);
 						
-						if ($thumbnail = $video->fetchThumbnail("sddefault")) 
+						if ($thumbnail = $video->fetchThumbnail(array("maxresdefault", "hqdefault", "mqdefault", "default"), false)) 
 							$video->thumbnail($thumbnail);
 
 					}

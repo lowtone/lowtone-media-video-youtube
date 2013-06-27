@@ -127,6 +127,18 @@ class Video extends Base {
 		return $youTubeId;
 	}
 
+	public function youTubeVideo() {
+		if (NULL !== ($data = $this->data()))
+			return YouTubeVideo::fromJson($data);
+
+		if (NULL === ($youTubeId = $this->youTubeId()))
+			return NULL;
+
+		return new YouTubeVideo(array(
+				YouTubeVideo::PROPERTY_YOUTUBE_VIDEO_ID => $youTubeId,
+			));
+	}
+
 	public function extractYouTubeId($guid = NULL) {
 		if (!isset($guid))
 			$guid = $this->{self::PROPERTY_GUID};
@@ -134,7 +146,7 @@ class Video extends Base {
 		return preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $guid, $matches) ? $matches[1] : false;
 	}
 
-	public function data() {
+	public function data($fetch = true) {
 		if (!($meta = reset($this->getMeta()->findByKey(self::META_YOUTUBE_DATA)))) {
 			if (false === ($data = $this->fetchData()))
 				return NULL;
@@ -148,48 +160,30 @@ class Video extends Base {
 
 	public function fetchData() {
 		if (NULL === ($youTubeId = $this->youTubeId()))
-			return false;
+			return NULL;
 
 		$video = new YouTubeVideo(array(
-				YouTubeVideo::PROPERTY_VIDEO_ID => $youTubeId,
+				YouTubeVideo::PROPERTY_YOUTUBE_VIDEO_ID => $youTubeId,
 			));
 
 		return $video->fetchData();
 	}
 
-	public function fetchThumbnail($name = NULL) {
-		if (NULL === ($data = $this->data()))
+	/**
+	 * Fetch a thumbnail for the video.
+	 * @param string|array $names One or more names that identify the required 
+	 * image. The first image that was found is returned.
+	 * @param bool $checkData Whether to check the YouTube data. If $checkData 
+	 * is set to FALSE the method will try to fetch every requisted image until 
+	 * a file is found which could slow the function down.
+	 * @return File|bool Returns a File instance on success or FALSE if no 
+	 * matching image is found.
+	 */
+	public function fetchThumbnail($names = "default", $checkData = true) {
+		if (NULL === ($video = $this->youTubeVideo()))
 			return false;
 
-		$thumbnails = $data->{'media$group'}->{'media$thumbnail'};
-
-		$thumbnail = false;
-
-		if (isset($name)) {
-
-			foreach ($thumbnails as $t) {
-				if ($t->{'yt$name'} != $name)
-					continue;
-
-				$thumbnail = $t;
-
-				break;
-
-			}
-
-		} else
-			$thumbnail = reset($thumbnails);
-
-		if (!$thumbnail)
-			return false;
-
-		try {
-			$file = File::get($thumbnail->url);
-		} catch (\Exception $e) {
-			return false;
-		}
-
-		return $file;
+		return $video->fetchThumbnail($names, $checkData);
 	}
 
 	// Static
