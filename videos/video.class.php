@@ -53,7 +53,7 @@ class Video extends Base {
 				self::PLAYER_OPTION_REL => 0,
 			), (array) $options);
 
-		$url = URL::fromString("http://www.youtube.com/embed/" . $youTubeId);
+		$url = URL::fromString((isset($_SERVER["HTTPS"]) ? "https" : "http") . "://www.youtube.com/embed/" . $youTubeId);
 
 		$query = array_intersect_key($options, array_flip(array(
 				self::PLAYER_OPTION_AUTOHIDE,
